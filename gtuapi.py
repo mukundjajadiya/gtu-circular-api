@@ -3,7 +3,7 @@ import requests
 
 
 def get_result():
-    url = 'https://www.gtu.ac.in/Circular.aspx'
+    url = 'https://www.old22.gtu.ac.in/Circular.aspx'
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}
 

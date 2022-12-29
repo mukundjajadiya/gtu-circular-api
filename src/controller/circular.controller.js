@@ -1,18 +1,26 @@
 const { getDb } = require("../config/db");
 const { formateDate } = require("../utils/formateDate");
 
+const db = getDb()
+  .then((db) => db)
+  .catch((error) => console.log("[ERROR]", error.message));
+
 // get all circular handler
 const getAllCircular = async (req, res) => {
   // read all circuler from db
-  const db = await getDb();
-  const collection = db.collection("circulars");
-  const allCircular = await collection.find({}).toArray();
+  try {
+    const db = await getDb();
+    const collection = db.collection("circulars");
+    const allCircular = await collection.find({}).toArray();
 
-  // return all circulars
-  return res.status(200).json({
-    success: true,
-    data: allCircular,
-  });
+    // return all circulars
+    return res.status(200).json({
+      success: true,
+      data: allCircular,
+    });
+  } catch (error) {
+    console.log("[ERROR]", error.message);
+  }
 };
 
 // get today or provided date circular date

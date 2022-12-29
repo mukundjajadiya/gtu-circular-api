@@ -3,9 +3,9 @@ const axios = require("axios");
 const { getDb } = require("../config/db");
 
 const scrapeCircular = async () => {
-  const db = await getDb();
-  const collection = db.collection("circulars");
   try {
+    const db = await getDb();
+    const collection = db.collection("circulars");
     const allCircular = [];
 
     console.log("\n[INFO] Fetching web content...");

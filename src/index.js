@@ -6,6 +6,12 @@ const { scrapeCircular } = require("./utils/scrapeCircular");
 const { connectDb } = require("./config/db");
 const app = express();
 
+let db = connectDb()
+  .then((db) => {
+    return db;
+  })
+  .catch((err) => console.log("err", err.message));
+
 // circular scraper interval in minutes
 const SET_INTERVAL_TIME_IN_MIN = 5;
 
@@ -44,8 +50,8 @@ app.use("/", async (req, res) => {
 // server init
 app.listen("5000", async () => {
   console.log("[INFO] Server is running on 5000");
-  await connectDb();
   await scrapeCircular();
 });
 
 module.exports = app;
+

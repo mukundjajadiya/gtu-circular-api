@@ -1,14 +1,11 @@
-const path = require("path");
-const fs = require("fs/promises");
+const { getDb } = require("../config/db");
 const { formateDate } = require("../utils/formateDate");
-const { getCollection } = require("../config/db");
-
-
 
 // get all circular handler
 const getAllCircular = async (req, res) => {
   // read all circuler from db
-  const collection = getCollection("circulars");
+  const db = await getDb();
+  const collection = db.collection("circulars");
   const allCircular = await collection.find({}).toArray();
 
   // return all circulars
@@ -22,7 +19,8 @@ const getAllCircular = async (req, res) => {
 const getCircular = async (req, res) => {
   try {
     // read all circuler from db
-    const collection = getCollection("circulars");
+    const db = await getDb();
+    const collection = db.collection("circulars");
 
     const allCircular = await collection.find({}).toArray();
 

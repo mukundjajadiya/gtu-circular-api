@@ -1,9 +1,10 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-const { getCollection } = require("../config/db");
+const { getDb } = require("../config/db");
 
 const scrapeCircular = async () => {
-  const collection = getCollection("circulars");
+  const db = await getDb();
+  const collection = db.collection("circulars");
   try {
     const allCircular = [];
 

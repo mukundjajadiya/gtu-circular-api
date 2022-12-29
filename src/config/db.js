@@ -7,22 +7,16 @@ const url = process.env.DB_URL;
 const client = new MongoClient(url);
 const dbName = "gtu-circular";
 
-let db;
 async function connectDb() {
   // Use connect method to connect to the server
   await client.connect();
   console.log("[INFO] Connected successfully to DB");
-
-  db = client.db(dbName);
-  const collection = db.collection("circulars");
-  return collection;
+  return client.db(dbName);
 }
 
-const getCollection = (name) => {
-  return db.collection(name);
-};
+const getDb = async () => await connectDb();
 
 module.exports = {
   connectDb,
-  getCollection,
+  getDb,
 };

@@ -18,9 +18,9 @@ const limiter = rateLimit({
 });
 
 // scraper interval call
-// setInterval(async () => {
-//   await scrapeCircular();
-// }, SET_INTERVAL_TIME_IN_MIN * 60 * 1000);
+setInterval(async () => {
+  await scrapeCircular();
+}, SET_INTERVAL_TIME_IN_MIN * 60 * 1000);
 
 // middleware
 app.use(cors());
@@ -42,3 +42,4 @@ app.listen("5000", async () => {
 });
 
 module.exports = app;
+

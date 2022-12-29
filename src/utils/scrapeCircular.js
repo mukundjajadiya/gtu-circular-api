@@ -1,19 +1,11 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-const path = require("path");
-const fs = require("fs/promises");
-const fsSync = require("fs");
+const { getCollection } = require("../config/db");
 
 const scrapeCircular = async () => {
+  const collection = getCollection("circulars");
   try {
     const allCircular = [];
-
-    const filePath = path.join("data", "all_circular.json");
-
-    if (!fsSync.existsSync(filePath)) {
-      await fs.mkdir("data");
-      console.log("\n[INFO] 'data' Directory created.");
-    }
 
     console.log("\n[INFO] Fetching web content...");
 
@@ -39,7 +31,13 @@ const scrapeCircular = async () => {
       allCircular.push(circular);
     });
 
-    await fs.writeFile(filePath, JSON.stringify(allCircular));
+    // delete all old circulars
+    await collection.deleteMany({});
+    console.log("\n[INFO] All documents deleted successfully.");
+
+    // add all new circulars
+    await collection.insertMany(allCircular);
+    console.log("\n[INFO] All circular add to db successfully.");
   } catch (error) {
     console.log("[ERROR]", error.message);
     return;

@@ -27,7 +27,12 @@ app.use(limiter);
 
 // api req middleware
 app.use("/api/v1/circulars", circularRoutes);
-
+app.use("/", async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "server is running...",
+  });
+});
 // server init
 app.listen("5000", "0.0.0.0", async () => {
   console.log("[INFO] Server is running on 5000");

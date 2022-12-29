@@ -28,12 +28,12 @@ Here is an example of how to use the API to retrieve the latest 50 circulars:
 ```javascript
 import axios from "axios";
 
-const apiUrl = "https://gtu-circular/api/v1";
+const apiUrl = "https://gtu-circular-api.vercel.app/api/v1";
 
 async function main() {
   import axios from "axios";
 
-  const apiUrl = "https://gtu-circular/api/v1";
+  const apiUrl = "https://gtu-circular-api.vercel.app/api/v1";
 
   async function getCirculars() {
     try {

@@ -34,7 +34,9 @@ app.use("/", async (req, res) => {
   });
 });
 // server init
-app.listen("5000", "0.0.0.0", async () => {
+app.listen("5000", async () => {
   console.log("[INFO] Server is running on 5000");
   await scrapeCircular();
 });
+
+module.exports = app;

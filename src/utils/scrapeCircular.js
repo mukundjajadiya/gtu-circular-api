@@ -2,14 +2,20 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const path = require("path");
 const fs = require("fs/promises");
+const fsSync = require("fs");
 
 const scrapeCircular = async () => {
   try {
     const allCircular = [];
 
     const filePath = path.join("data", "all_circular.json");
-    console.log("[INFO] 'data' Directory created.");
-    console.log("[INFO] Fetching web content...");
+
+    if (!fsSync.existsSync(filePath)) {
+      await fs.mkdir("data");
+      console.log("\n[INFO] 'data' Directory created.");
+    }
+
+    console.log("\n[INFO] Fetching web content...");
 
     const response = await axios.get("https://www.gtu.ac.in/Circular.aspx");
 

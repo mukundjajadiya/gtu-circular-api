@@ -16,8 +16,6 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-(async()=>await scrapeCircular())()
-
 // scraper interval call
 setInterval(async () => {
   await scrapeCircular();
@@ -33,4 +31,5 @@ app.use("/api/v1/circulars", circularRoutes);
 // server init
 app.listen("5000", "0.0.0.0", async () => {
   console.log("[INFO] Server is running on 5000");
+  await scrapeCircular();
 });

@@ -34,7 +34,7 @@ const getCircular = async (req, res) => {
 
     // get date from req
     const circularDate = req.params.date;
-   
+
     // formating date
     const formatedDate = await formateDate(circularDate);
 
@@ -56,5 +56,4 @@ const getCircular = async (req, res) => {
 module.exports = {
   getAllCircular,
   getCircular,
-  // getTodayCircular,
 };

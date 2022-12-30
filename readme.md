@@ -8,14 +8,16 @@ This API allows you to scrape and retrieve the latest circulars from Gujarat Tec
 
 This endpoint retrieves the latest 50 circulars from GTU. The response is a JSON array containing the following information for each circular:
 
-- `index`: Index of the circular.
+- `_id`: ID of the circular.
 - `date`: The date the circular was published, in the format dd-Month-yyyy.
-- `link`: The URL of the circular on the GTU website.
-- `text`: Description of the circular.
+- `circulars`: [{
+  - `link`: The URL of the circular on the GTU website.
+  - `text`: Description of the circular.
+    }]
 
-### 2. /circulars/date-monthName-year
+### 2. /circulars/DD-MMM-YYYY
 
-This endpoint retrieves the circulars published on a specific date. The date should be provided in the format date-monthName-year, where date is the day of the month (two digits), monthName is the short name of the month (ex. December -> Dec), and year is the year (four digits). The response is a JSON array in the same format as the /circulars endpoint.
+This endpoint retrieves the circulars published on a specific date. The date should be provided in the format DD-MMM-YYYY, where DD is the day of the month (two digits), MMM is the short name of the month (ex. December -> Dec), and YYYY is the year (four digits). The response is a JSON array in the same format as the /circulars endpoint.
 
 ### 3. /circulars/today
 

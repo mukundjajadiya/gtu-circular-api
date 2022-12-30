@@ -1,22 +1,13 @@
-const { MongoClient } = require("mongodb");
-const { config } = require("dotenv");
+import mongoose from "mongoose";
+import { config } from "dotenv";
 
 config();
-// Connection URL
-const url = process.env.DB_URL;
-const client = new MongoClient(url);
-const dbName = "gtu-circular";
 
-async function connectDb() {
-  // Use connect method to connect to the server
-  await client.connect();
-  console.log("[INFO] Connected successfully to DB");
-  return client.db(dbName);
-}
+const url = process.env.DB_URL; // Connection URL
+const db = "gtu-circular"; // DB name
 
-const getDb = async () => await connectDb();
-
-module.exports = {
-  connectDb,
-  getDb,
+export const connectDb = async () => {
+  mongoose.set("strictQuery", true);
+  await mongoose.connect(`${url}/${db}`, { useNewUrlParser: true });
+  console.log("[INFO] Connected successfully to DB.");
 };

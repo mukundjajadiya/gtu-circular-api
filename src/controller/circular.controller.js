@@ -1,17 +1,14 @@
-const { getDb } = require("../config/db");
-const { formateDate } = require("../utils/formateDate");
-
-const db = getDb()
-  .then((db) => db)
-  .catch((error) => console.log("[ERROR]", error.message));
+import { Circular } from "../model/Circular.js";
+import { formateDate } from "../utils/formateDate.js";
 
 // get all circular handler
-const getAllCircular = async (req, res) => {
+export const getAllCircular = async (req, res) => {
   // read all circuler from db
   try {
-    const db = await getDb();
-    const collection = db.collection("circulars");
-    const allCircular = await collection.find({}).toArray();
+    const allCircular = await Circular.find(
+      {},
+      { date: 1, _id: 1, circulars: 1 }
+    );
 
     // return all circulars
     return res.status(200).json({
@@ -24,14 +21,8 @@ const getAllCircular = async (req, res) => {
 };
 
 // get today or provided date circular date
-const getCircular = async (req, res) => {
+export const getCircular = async (req, res) => {
   try {
-    // read all circuler from db
-    const db = await getDb();
-    const collection = db.collection("circulars");
-
-    const allCircular = await collection.find({}).toArray();
-
     // get date from req
     const circularDate = req.params.date;
 
@@ -39,8 +30,9 @@ const getCircular = async (req, res) => {
     const formatedDate = await formateDate(circularDate);
 
     // filter today circular from all circular
-    const todayCircular = allCircular.filter(
-      (circular) => circular.date == formatedDate
+    const todayCircular = await Circular.find(
+      { date: formatedDate },
+      { date: 1, _id: 1, circulars: 1 }
     );
 
     // return success res
@@ -51,9 +43,4 @@ const getCircular = async (req, res) => {
   } catch (error) {
     console.log("[ERROR]", error.message);
   }
-};
-
-module.exports = {
-  getAllCircular,
-  getCircular,
 };

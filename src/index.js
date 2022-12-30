@@ -1,16 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
-const circularRoutes = require("./routes/circular.route");
-const { scrapeCircular } = require("./utils/scrapeCircular");
-const { connectDb } = require("./config/db");
-const app = express();
+import express from "express";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import compression from "compression";
+import circularRoutes from "./routes/circular.route.js";
+import { scrapeCircular } from "./utils/scrapeCircular.js";
+import { connectDb } from "./config/db.js";
+import { formateDate } from "./utils/formateDate.js";
 
-let db = connectDb()
-  .then((db) => {
-    return db;
-  })
-  .catch((err) => console.log("err", err.message));
+const app = express();
 
 // circular scraper interval in minutes
 const SET_INTERVAL_TIME_IN_MIN = 5;
@@ -35,6 +32,7 @@ setInterval(async () => {
 }, SET_INTERVAL_TIME_IN_MIN * 60 * 1000);
 
 // middleware
+app.use(compression());
 app.use(cors());
 app.use(limiter);
 
@@ -49,9 +47,9 @@ app.use("/", async (req, res) => {
 
 // server init
 app.listen("5000", async () => {
-  console.log("[INFO] Server is running on 5000");
+  console.log(`[INFO] ${await formateDate()} Server is running on 5000`);
+  await connectDb();
   await scrapeCircular();
 });
 
-module.exports = app;
-
+export default app;

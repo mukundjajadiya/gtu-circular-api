@@ -30,45 +30,37 @@ Here is an example of how to use the API to retrieve the latest 50 circulars:
 ```javascript
 import axios from "axios";
 
-const apiUrl = "https://gtu-circular-api.vercel.app/api/v1";
+const apiUrl = "https://gtu-circular-api.onrender.com/api/v1";
 
-async function main() {
-  import axios from "axios";
-
-  const apiUrl = "https://gtu-circular-api.vercel.app/api/v1";
-
-  async function getCirculars() {
-    try {
-      const response = await axios.get(`${apiUrl}/circulars`);
-      const circulars = response.data;
-      console.log(circulars);
-    } catch (error) {
-      console.error(error);
-    }
+async function getCirculars() {
+  try {
+    const response = await axios.get(`${apiUrl}/circulars`);
+    const circulars = response.data;
+    console.log(circulars);
+  } catch (error) {
+    console.error(error);
   }
-  async function getTodayCirculars() {
-    try {
-      const response = await axios.get(`${apiUrl}/circulars/today`);
-      const circulars = response.data;
-      console.log(circulars);
-    } catch (error) {
-      console.error(error);
-    }
+}
+async function getTodayCirculars() {
+  try {
+    const response = await axios.get(`${apiUrl}/circulars/today`);
+    const circulars = response.data;
+    console.log(circulars);
+  } catch (error) {
+    console.error(error);
   }
-  async function getCircularsByDate() {
-    try {
-      const response = await axios.get(`${apiUrl}/circulars/15-Jan-2021`);
-      const circulars = response.data;
-      console.log(circulars);
-    } catch (error) {
-      console.error(error);
-    }
+}
+async function getCircularsByDate() {
+  try {
+    const response = await axios.get(`${apiUrl}/circulars/15-Jan-2021`);
+    const circulars = response.data;
+    console.log(circulars);
+  } catch (error) {
+    console.error(error);
   }
-
-  getCirculars();
-  getTodayCirculars();
-  getCircularsByDate();
 }
 
-main();
+getCirculars();
+getTodayCirculars();
+getCircularsByDate();
 ```

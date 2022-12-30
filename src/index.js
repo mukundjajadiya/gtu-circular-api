@@ -26,6 +26,9 @@ const limiter = rateLimit({
 });
 
 // scraper interval call
+console.log(
+  `\n[INFO] Scraper interval set to ${SET_INTERVAL_TIME_IN_MIN} min.`
+);
 setInterval(async () => {
   await scrapeCircular();
 }, SET_INTERVAL_TIME_IN_MIN * 60 * 1000);
@@ -36,18 +39,15 @@ app.use(limiter);
 
 // api req middleware
 app.use("/api/v1/circulars", circularRoutes);
-app.use("/", async (req, res) => {
+app.use("*", async (req, res) => {
   res.status(200).json({
-    success: true,
-    message: "server is running...",
+    message: `'${req.baseUrl}' not exist.`,
   });
 });
 
-
-
 // server init
 app.listen(process.env.PORT || "5000", async () => {
-  console.log(`[INFO] ${await formateDate()} Server is running on 5000`);
+  console.log(`\n[INFO] ${await formateDate()} Server is running on 5000`);
   await connectDb();
   await scrapeCircular();
 });

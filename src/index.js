@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-const compression = require("compression");
 const circularRoutes = require("./routes/circular.route");
 const { scrapeCircular } = require("./utils/scrapeCircular");
 const { connectDb } = require("./config/db");
@@ -32,7 +31,6 @@ setInterval(async () => {
 }, SET_INTERVAL_TIME_IN_MIN * 60 * 1000);
 
 // middleware
-app.use(compression());
 app.use(cors());
 app.use(limiter);
 

@@ -1,11 +1,11 @@
-import express from "express";
-import cors from "cors";
-import rateLimit from "express-rate-limit";
-import compression from "compression";
-import circularRoutes from "./routes/circular.route.js";
-import { scrapeCircular } from "./utils/scrapeCircular.js";
-import { connectDb } from "./config/db.js";
-import { formateDate } from "./utils/formateDate.js";
+const express = require("express");
+const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+const compression = require("compression");
+const circularRoutes = require("./routes/circular.route");
+const { scrapeCircular } = require("./utils/scrapeCircular");
+const { connectDb } = require("./config/db");
+const { formateDate } = require("./utils/formateDate");
 
 const app = express();
 
@@ -52,4 +52,5 @@ app.listen("5000", async () => {
   await scrapeCircular();
 });
 
-export default app;
+module.exports = app;
+

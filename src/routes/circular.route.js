@@ -1,8 +1,8 @@
-import { Router } from "express";
-import {
+const {Router} = require("express");
+const {
   getAllCircular,
   getCircular,
-} from "../controller/circular.controller.js";
+} = require("../controller/circular.controller");
 
 const router = Router();
 // handle today circular route
@@ -14,4 +14,4 @@ router.get("/:date", getCircular);
 // handle all circulars route
 router.get("/", getAllCircular);
 
-export default router;
+module.exports = router;

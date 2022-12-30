@@ -1,4 +1,4 @@
-export const formateDate = async (circularDate) => {
+const formateDate = async (circularDate) => {
   const todayDate = async () => {
     const date = new Date();
 
@@ -22,4 +22,8 @@ export const formateDate = async (circularDate) => {
   const month = date.toLocaleString("default", { month: "short" });
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
+};
+
+module.exports = {
+  formateDate,
 };

@@ -1,10 +1,10 @@
-import cheerio from "cheerio";
-import axios from "axios";
+const cheerio = require("cheerio");
+const axios = require("axios");
 
-import { Circular } from "../model/Circular.js";
-import { formateDate } from "./formateDate.js";
+const { Circular } = require("../model/Circular");
+const { formateDate } = require("./formateDate");
 
-export const scrapeCircular = async () => {
+const scrapeCircular = async () => {
   try {
     console.log("\n[INFO] Fetching web content...");
     const response = await axios.get("https://www.gtu.ac.in/Circular.aspx");
@@ -52,3 +52,5 @@ export const scrapeCircular = async () => {
     console.log("[ERROR]", error.message);
   }
 };
+
+module.exports = { scrapeCircular };

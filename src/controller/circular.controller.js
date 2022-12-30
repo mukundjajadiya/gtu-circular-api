@@ -1,8 +1,8 @@
-import { Circular } from "../model/Circular.js";
-import { formateDate } from "../utils/formateDate.js";
+const { Circular } = require("../model/Circular");
+const { formateDate } = require("../utils/formateDate");
 
 // get all circular handler
-export const getAllCircular = async (req, res) => {
+const getAllCircular = async (req, res) => {
   // read all circuler from db
   try {
     const allCircular = await Circular.find(
@@ -21,7 +21,7 @@ export const getAllCircular = async (req, res) => {
 };
 
 // get today or provided date circular date
-export const getCircular = async (req, res) => {
+const getCircular = async (req, res) => {
   try {
     // get date from req
     const circularDate = req.params.date;
@@ -43,4 +43,9 @@ export const getCircular = async (req, res) => {
   } catch (error) {
     console.log("[ERROR]", error.message);
   }
+};
+
+module.exports = {
+  getAllCircular,
+  getCircular,
 };

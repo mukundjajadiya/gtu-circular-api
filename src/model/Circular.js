@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const circularSchema = new mongoose.Schema({
   date: {
@@ -21,4 +21,6 @@ const circularSchema = new mongoose.Schema({
   ],
 });
 
-export const Circular = mongoose.model("Circular", circularSchema);
+const Circular = mongoose.model("Circular", circularSchema);
+
+module.exports = { Circular };

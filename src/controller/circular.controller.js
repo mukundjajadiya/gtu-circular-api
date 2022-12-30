@@ -8,7 +8,7 @@ const getAllCircular = async (req, res) => {
     const allCircular = await Circular.find(
       {},
       { date: 1, _id: 1, circulars: 1 }
-    );
+    ).sort({ date: -1 });
 
     // return all circulars
     return res.status(200).json({
@@ -33,7 +33,7 @@ const getCircular = async (req, res) => {
     const todayCircular = await Circular.find(
       { date: formatedDate },
       { date: 1, _id: 1, circulars: 1 }
-    );
+    ).sort({ date: -1 });
 
     // return success res
     return res.status(200).json({

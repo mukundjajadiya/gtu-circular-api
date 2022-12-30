@@ -15,7 +15,7 @@ const SET_INTERVAL_TIME_IN_MIN = 5;
 // api req rate limiter
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 min
-  max: 5, // max req allow in 1 min
+  max: 20, // max req allow in 1 min
   standardHeaders: true,
   legacyHeaders: false,
   message: {

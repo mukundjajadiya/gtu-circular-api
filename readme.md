@@ -2,6 +2,8 @@
 
 This API allows you to scrape and retrieve the latest circulars from Gujarat Technological University (GTU). It offers the following endpoints:
 
+### Live URL: [GTU Circular Scraper API ](https://gtu-circular-api.onrender.com) (NOTE: It can time to load because it's use free cluster).
+
 ## Endpoints
 
 ### 1. /circulars
